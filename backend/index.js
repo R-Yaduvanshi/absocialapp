@@ -3,6 +3,7 @@ const { connection } = require("./config/db");
 const app = express();
 const cors = require("cors");
 const Users = require("./routes/user.route");
+const Posts = require("./routes/post.route");
 require("dotenv").config();
 app.use(express.json());
 const PORT = process.env.PORT || 7000;
@@ -15,6 +16,9 @@ app.get("/", (req, res) => {
 // Users route
 app.use("/", Users);
 
+// <================================== Post Routes <=================================================>
+
+app.use("/", Posts);
 app.listen(PORT, async () => {
   try {
     await connection;
