@@ -37,4 +37,19 @@ app.post("/users", async (req, res) => {
   return res.status(200).json({ user });
 });
 
+// Retrieve a user by id.
+
+app.get("/users/:id", async (req, res) => {
+  try {
+    const user = await Users.findById(req.params.id);
+    if (!user) {
+      return res.status(404).send({ message: "User not Found" });
+    }
+    res.status(200).send(user);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ message: "Server Error" });
+  }
+});
+
 module.exports = app;

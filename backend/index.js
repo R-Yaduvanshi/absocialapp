@@ -12,7 +12,7 @@ app.get("/", (req, res) => {
   res.status(200).send("Welcome to My Social media app");
 });
 
-// Creating user
+// Users route
 app.use("/", Users);
 
 app.listen(PORT, async () => {
