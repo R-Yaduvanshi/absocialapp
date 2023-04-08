@@ -51,4 +51,17 @@ app.get("/posts/:id", async (req, res) => {
     res.status(400).send({ message: "Something went wrong" });
   }
 });
+
+// <================================= Retrieve a post by id. <=======================================>
+
+app.put("/posts/:id", async (req, res) => {
+  const postID = req.params.id;
+  try {
+    const updatePost = await PostModel.findByIdAndUpdate(postID, req.body);
+    res.status(200).send({ message: "Post updated Success" });
+  } catch (err) {
+    res.status(500).send({ message: "Something went wrong" });
+    console.log(err);
+  }
+});
 module.exports = app;
