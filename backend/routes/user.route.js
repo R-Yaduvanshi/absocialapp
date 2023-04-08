@@ -14,7 +14,7 @@ app.post("/users", async (req, res) => {
   try {
     exsistUser = await Users.findOne({ email });
   } catch (err) {
-    return console.log(err);
+    return console.log("=====>>>>", err);
   }
 
   if (exsistUser) {
@@ -29,11 +29,20 @@ app.post("/users", async (req, res) => {
 
   try {
     await user.save();
-  } catch (err) {
-    return console.log(err);
+  } catch (error) {
+    if (error.name === "ValidationError") {
+      let errors = {};
+
+      Object.keys(error.errors).forEach((key) => {
+        errors[key] = error.errors[key].message;
+      });
+
+      return res.status(400).send(errors);
+    }
+    res.status(500).send("Something went wrong");
   }
 
-  return res.status(200).json({ user });
+  return res.status(201).json({ user });
 });
 
 // <============================> Retrieve a user by id. <=======================================>
