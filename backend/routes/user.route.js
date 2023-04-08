@@ -76,4 +76,16 @@ app.delete("/users/:id", async (req, res) => {
     res.status(500).send({ message: "Something went wrong" });
   }
 });
+
+// <============================ Retrieve the total number of users. <================================>
+
+app.get("/analytics/users", async (req, res) => {
+  try {
+    const allUser = await Users.find();
+    res.send({ total_users: allUser.length });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ message: "Something went wrong" });
+  }
+});
 module.exports = app;
