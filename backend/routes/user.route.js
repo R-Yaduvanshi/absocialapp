@@ -3,8 +3,7 @@ const express = require("express");
 const { Users } = require("../userModel/User.model");
 const app = express.Router();
 
-// Creating Users
-
+//<==================================> Creating Users <==========================================>
 app.post("/users", async (req, res) => {
   const { name, email, bio } = req.body;
 
@@ -37,7 +36,7 @@ app.post("/users", async (req, res) => {
   return res.status(200).json({ user });
 });
 
-// Retrieve a user by id.
+// <============================> Retrieve a user by id. <=======================================>
 
 app.get("/users/:id", async (req, res) => {
   try {
@@ -52,7 +51,7 @@ app.get("/users/:id", async (req, res) => {
   }
 });
 
-// Update a user's name or bio by id
+//<========================== Update a user's name or bio by id <====================================>
 
 app.put("/users/:id", async (req, res) => {
   const userID = req.params.id;
@@ -62,6 +61,19 @@ app.put("/users/:id", async (req, res) => {
   } catch (err) {
     res.status(500).send({ message: "Something went wrong" });
     console.log(err);
+  }
+});
+
+// <=================================== Delete a user by id. <======================================>
+
+app.delete("/users/:id", async (req, res) => {
+  const userID = req.params.id;
+  try {
+    await Users.findByIdAndDelete(userID);
+    res.status(200).send({ message: "Deleted Successfull" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ message: "Something went wrong" });
   }
 });
 module.exports = app;
