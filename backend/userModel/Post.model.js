@@ -11,7 +11,15 @@ const postSchema = new mongoose.Schema(
         }
       },
     },
-    likes: { type: Number, trim: true, default: 0 },
+    likes: {
+      type: Number,
+      default: 0,
+      validate(value) {
+        if (!validator.isNumeric(String(value), { no_symbols: true })) {
+          throw Error("Likes or Dislike should not be a negative number");
+        }
+      },
+    },
   },
   {
     versionKey: false,

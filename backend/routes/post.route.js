@@ -7,7 +7,7 @@ require("dotenv").config();
 // <==================================== Create a new post. <========================================>
 
 app.post("/posts", async (req, res) => {
-  const { user_id, content } = req.body;
+  const { user_id, content, likes } = req.body;
   let userExit;
   try {
     userExit = await Users.findById(user_id);
@@ -16,11 +16,20 @@ app.post("/posts", async (req, res) => {
     }
 
     // Create new Post
-    const post = new PostModel({ user_id, content });
+    const post = new PostModel({ user_id, content, likes });
     await post.save();
 
     res.status(201).send(post);
   } catch (err) {
+    if (err.name === "ValidationError") {
+      let errors = {};
+
+      Object.keys(err.errors).forEach((key) => {
+        errors[key] = err.errors[key].message;
+      });
+
+      return res.status(400).send(errors);
+    }
     res.status(500).send({ message: "Something went wrong" });
     console.log(err);
   }
