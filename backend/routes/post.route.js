@@ -35,4 +35,20 @@ app.post("/posts", async (req, res) => {
   }
 });
 
+// <==================================== Retrieve a post by id. <====================================>
+
+app.get("/posts/:id", async (req, res) => {
+  const postID = req.params.id;
+
+  try {
+    const postIdExit = await PostModel.findById(postID);
+    if (!postIdExit) {
+      return res.status(404).send({ message: "Post not found" });
+    }
+
+    res.status(200).send(postIdExit);
+  } catch (err) {
+    res.status(400).send({ message: "Something went wrong" });
+  }
+});
 module.exports = app;
