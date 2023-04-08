@@ -64,4 +64,17 @@ app.put("/posts/:id", async (req, res) => {
     console.log(err);
   }
 });
+
+// <===================================== Delete a post by id. <=======================================>
+
+app.delete("/posts/:id", async (req, res) => {
+  const postID = req.params.id;
+  try {
+    await PostModel.findByIdAndDelete(postID);
+    res.status(200).send({ message: "Post Deleted Successfull" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ message: "Something went wrong" });
+  }
+});
 module.exports = app;
