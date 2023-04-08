@@ -52,4 +52,16 @@ app.get("/users/:id", async (req, res) => {
   }
 });
 
+// Update a user's name or bio by id
+
+app.put("/users/:id", async (req, res) => {
+  const userID = req.params.id;
+  try {
+    const updateUser = await Users.findByIdAndUpdate(userID, req.body);
+    res.status(200).send({ message: "Put Request Success" });
+  } catch (err) {
+    res.status(500).send({ message: "Something went wrong" });
+    console.log(err);
+  }
+});
 module.exports = app;
