@@ -1,6 +1,8 @@
 import * as types from "./action.types";
 import axios from "axios";
 
+// <============================ Create User Action <==========================================>
+
 export const createUser = (payload) => async (dispatch) => {
   dispatch({ type: types.CREATE_USER_REQUEST });
   try {
@@ -13,6 +15,8 @@ export const createUser = (payload) => async (dispatch) => {
   }
 };
 
+// <============================ Get All User Action <==========================================>
+
 export const getAllUsers = () => async (dispatch) => {
   dispatch({ type: types.GET_ALL_USER_REQUEST });
   try {
@@ -23,3 +27,19 @@ export const getAllUsers = () => async (dispatch) => {
     return "FAILED";
   }
 };
+
+// <============================ Edit User Action <==========================================>
+
+export const editUser =
+  ({ payload, id }) =>
+  async (dispatch) => {
+    dispatch({ type: types.EDIT_USER_REQUEST });
+    try {
+      let res = await axios.put(`http://localhost:7000/users/${id}`, payload);
+      console.log(res);
+      return "SUCCESS";
+    } catch (err) {
+      dispatch({ type: types.GET_ALL_USER_FAILURE });
+      return "FAILED";
+    }
+  };

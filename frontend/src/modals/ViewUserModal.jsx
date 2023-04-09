@@ -12,13 +12,20 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React from "react";
-
+import AOS from "aos";
+import "aos/dist/aos.css";
 const ViewUserModal = ({ name, email, bio, updatedTime, createdTime, id }) => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   return (
     <>
       <Button onClick={onOpen}>View</Button>
-      <Modal onClose={onClose} isOpen={isOpen} isCentered>
+      <Modal
+        data-aos="zoom-out"
+        data-aos-delay={100}
+        onClose={onClose}
+        isOpen={isOpen}
+        isCentered
+      >
         <ModalOverlay />
         <ModalContent>
           <ModalHeader textAlign={"center"}>User Details</ModalHeader>
