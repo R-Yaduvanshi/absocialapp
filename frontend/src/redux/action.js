@@ -4,13 +4,13 @@ import axios from "axios";
 // <============================ Create User Action <==========================================>
 
 export const createUser = (payload) => async (dispatch) => {
-  dispatch({ type: types.CREATE_USER_REQUEST });
+  await dispatch({ type: types.CREATE_USER_REQUEST });
   try {
     let res = await axios.post("http://localhost:7000/users", payload);
-    dispatch({ type: types.CREATE_USER_SUCCESS, payload: res.data });
+    await dispatch({ type: types.CREATE_USER_SUCCESS, payload: res.data });
     return "SUCCESS";
   } catch (err) {
-    dispatch({ type: types.CREATE_USER_FAILURE });
+    await dispatch({ type: types.CREATE_USER_FAILURE });
     return "FAILED";
   }
 };
@@ -18,12 +18,13 @@ export const createUser = (payload) => async (dispatch) => {
 // <============================ Get All User Action <==========================================>
 
 export const getAllUsers = () => async (dispatch) => {
-  dispatch({ type: types.GET_ALL_USER_REQUEST });
+  await dispatch({ type: types.GET_ALL_USER_REQUEST });
   try {
     let res = await axios.get("http://localhost:7000/allusers");
-    dispatch({ type: types.GET_ALL_USER_SUCCESS, payload: res.data });
+    await dispatch({ type: types.GET_ALL_USER_SUCCESS, payload: res.data });
+    return "SUCCESS";
   } catch (err) {
-    dispatch({ type: types.GET_ALL_USER_FAILURE });
+    await dispatch({ type: types.GET_ALL_USER_FAILURE });
     return "FAILED";
   }
 };
@@ -33,13 +34,28 @@ export const getAllUsers = () => async (dispatch) => {
 export const editUser =
   ({ payload, id }) =>
   async (dispatch) => {
-    dispatch({ type: types.EDIT_USER_REQUEST });
+    await dispatch({ type: types.EDIT_USER_REQUEST });
     try {
       let res = await axios.put(`http://localhost:7000/users/${id}`, payload);
-      console.log(res);
+      await dispatch({ type: types.EDIT_USER_SUCCESS });
       return "SUCCESS";
     } catch (err) {
-      dispatch({ type: types.GET_ALL_USER_FAILURE });
+      await dispatch({ type: types.GET_ALL_USER_FAILURE });
       return "FAILED";
     }
   };
+
+// <============================ Deletet User Action <==========================================>
+
+export const deleteUser = (id) => async (dispatch) => {
+  await dispatch({ type: types.DELETE_USER_REQUEST });
+
+  try {
+    let res = await axios.delete(`http://localhost:7000/users/${id}`);
+    await dispatch({ type: types.DELETE_USER_SUCCESS });
+    return "SUCCESS";
+  } catch (err) {
+    await dispatch({ type: types.DELETE_USER_FAILURE });
+    return "FAILED";
+  }
+};

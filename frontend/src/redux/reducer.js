@@ -69,6 +69,24 @@ export const reducer = (oldState = initialState, { type, payload }) => {
         isLoading: false,
         isError: true,
       };
+
+    // <============================ Edit User Reducer <==========================================>
+    case types.DELETE_USER_REQUEST:
+      return {
+        ...oldState,
+        isLoading: true,
+      };
+    case types.DELETE_USER_SUCCESS:
+      return {
+        ...oldState,
+        isLoading: false,
+      };
+    case types.DELETE_USER_FAILURE:
+      return {
+        ...oldState,
+        isLoading: false,
+        isError: true,
+      };
     default:
       return oldState;
   }

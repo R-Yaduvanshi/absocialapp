@@ -10,6 +10,7 @@ import {
   Stack,
   StackDivider,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import AOS from "aos";
@@ -17,10 +18,25 @@ import "aos/dist/aos.css";
 import ViewUserModal from "../modals/ViewUserModal";
 import { timeConverter } from "../utils/convertTime";
 import EditUserModal from "../modals/EditUserModal";
+import { useDispatch } from "react-redux";
+import { deleteUser, getAllUsers } from "../redux/action";
 const UserCard = ({ name, email, bio, i, createdAt, updatedAt, id }) => {
   const createdTime = timeConverter(createdAt);
   const updatedTime = timeConverter(updatedAt);
-
+  const dispatch = useDispatch();
+  const toast = useToast();
+  const handleDelete = async (id) => {
+    let res = await dispatch(deleteUser(id));
+    await dispatch(getAllUsers());
+    toast({
+      title: "Account Deleted",
+      description: "We've Deleted your account .",
+      status: "success",
+      duration: 9000,
+      isClosable: true,
+      position: "top",
+    });
+  };
   useEffect(() => {
     AOS.init();
   }, []);
@@ -30,7 +46,7 @@ const UserCard = ({ name, email, bio, i, createdAt, updatedAt, id }) => {
         <Flex justifyContent={"center"}>
           <Avatar
             name="Segun Adebayo"
-            src="https://xsgames.co/randomusers/avatar.php?g=pixel "
+            src="https://xsgames.co/randomusers/avatar.php?g=pixel"
           />
         </Flex>
 
@@ -74,7 +90,7 @@ const UserCard = ({ name, email, bio, i, createdAt, updatedAt, id }) => {
               updatedTime={updatedTime}
               id={id}
             />
-            <Button>Delete</Button>
+            <Button onClick={() => handleDelete(id)}>Delete</Button>
           </Box>
         </Stack>
       </CardBody>
