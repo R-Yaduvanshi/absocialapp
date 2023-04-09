@@ -1,16 +1,36 @@
-import { Box, Button, Container, SimpleGrid } from "@chakra-ui/react";
+import { Button, Container, SimpleGrid } from "@chakra-ui/react";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
   return (
     <Container maxW={"60%"} h="88vh">
       <SimpleGrid columns={3} spacing={10} pt="20px">
-        <Button colorScheme="linkedin">Create User</Button>
-        <Button colorScheme="facebook">See All Users</Button>
-        <Button colorScheme="messenger">Create Post</Button>
-        <Button colorScheme="whatsapp">See All Post</Button>
-        <Button colorScheme="twitter">User Analytics</Button>
-        <Button colorScheme="telegram">Post Analytics</Button>
+        <Button colorScheme="linkedin" onClick={() => navigate("/users")}>
+          Create User
+        </Button>
+        <Button colorScheme="facebook" onClick={() => navigate("/seeallusers")}>
+          See All Users
+        </Button>
+        <Button colorScheme="messenger" onClick={() => navigate("/post")}>
+          Create Post
+        </Button>
+        <Button colorScheme="whatsapp" onClick={() => navigate("/seeallpost")}>
+          See All Post
+        </Button>
+        <Button
+          colorScheme="twitter"
+          onClick={() => navigate("/useranalytics")}
+        >
+          User Analytics
+        </Button>
+        <Button
+          colorScheme="telegram"
+          onClick={() => navigate("/postanalytics")}
+        >
+          Post Analytics
+        </Button>
       </SimpleGrid>
     </Container>
   );

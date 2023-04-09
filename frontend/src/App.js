@@ -8,7 +8,7 @@ function App() {
     <div
       className="App"
       style={{
-        backgroundColor: "#fadde1",
+        backgroundColor: "#FFFFFF",
       }}
     >
       <Navbar />
