@@ -42,7 +42,7 @@ app.post("/users", async (req, res) => {
     res.status(500).send("Something went wrong");
   }
 
-  return res.status(201).json({ user });
+  return res.status(201).json(user);
 });
 
 // <============================> Retrieve a user by id. <=======================================>
@@ -91,10 +91,24 @@ app.delete("/users/:id", async (req, res) => {
 app.get("/analytics/users", async (req, res) => {
   try {
     const allUser = await Users.find();
-    res.send({ total_users: allUser.length });
+    // res.send({ total_users: allUser.length });
+    res.send(allUser);
   } catch (err) {
     console.log(err);
     res.status(500).send({ message: "Something went wrong" });
   }
 });
+
+// Get All User
+
+app.get("/allusers", async (req, res) => {
+  try {
+    const allUser = await Users.find();
+    res.status(200).send(allUser);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ message: "Something went wrong" });
+  }
+});
+
 module.exports = app;

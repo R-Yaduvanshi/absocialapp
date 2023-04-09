@@ -19,6 +19,7 @@ app.use("/", Users);
 // <================================== Post Routes <=================================================>
 
 app.use("/", Posts);
+
 app.listen(PORT, async () => {
   try {
     await connection;
