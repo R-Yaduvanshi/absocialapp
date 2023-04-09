@@ -1,4 +1,12 @@
-import { Box, Button, Flex, Input, Text, Textarea } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Input,
+  Text,
+  Textarea,
+  useToast,
+} from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createUser } from "../redux/action";
@@ -8,28 +16,65 @@ const UserForm = () => {
   const [bio, setBio] = useState("");
 
   const dispatch = useDispatch();
+  const toast = useToast();
   const handleCreateForm = async () => {
     // Form Validation
     let payload = { name, email, bio };
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
     if (payload.name.length == 0) {
-      return alert("Name cannot be blank");
+      return toast({
+        title: "Name Cannot be blank",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+        position: "top",
+      });
     }
     if (name.length > 50) {
-      return alert("Name should be less than 50 words");
+      return toast({
+        title: "Name should be less than 50 words",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+        position: "top",
+      });
     }
     if (payload.email.length == 0) {
-      return alert("Email cannot be blank");
+      return toast({
+        title: "Email cannot be blank",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+        position: "top",
+      });
     }
     if (!regex.test(email)) {
-      return alert("Please provide valid email");
+      return toast({
+        title: "Please provide valid email",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+        position: "top",
+      });
     }
     if (payload.bio.length == 0) {
-      return alert("Bio cannot be blank");
+      return toast({
+        title: "Bio cannot be blank",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+        position: "top",
+      });
     }
     if (bio.length > 400) {
-      return alert("Bio should be less than 400 words");
+      return toast({
+        title: "Bio should be less than 400 words",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+        position: "top",
+      });
     }
 
     let output = await dispatch(createUser(payload));
@@ -38,9 +83,22 @@ const UserForm = () => {
       setName("");
       setEmail("");
       setBio("");
-      return alert("User Created Successfully");
+      toast({
+        title: "Account Created",
+        description: "We've created your account for you.",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+        position: "top",
+      });
     } else {
-      return alert("Something went wrong");
+      toast({
+        title: "Something went wrong",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+        position: "top",
+      });
     }
   };
   return (
