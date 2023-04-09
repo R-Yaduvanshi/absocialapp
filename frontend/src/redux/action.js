@@ -17,7 +17,6 @@ export const getAllUsers = () => async (dispatch) => {
   dispatch({ type: types.GET_ALL_USER_REQUEST });
   try {
     let res = await axios.get("http://localhost:7000/allusers");
-    // console.log(res.data);
     dispatch({ type: types.GET_ALL_USER_SUCCESS, payload: res.data });
   } catch (err) {
     dispatch({ type: types.GET_ALL_USER_FAILURE });

@@ -14,7 +14,13 @@ import {
 import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-const UserCard = ({ name, email, bio, i, createdAt, updatedAt }) => {
+import ViewUserModal from "../modals/ViewUserModal";
+import { timeConverter } from "../utils/convertTime";
+import EditUserModal from "../modals/EditUserModal";
+const UserCard = ({ name, email, bio, i, createdAt, updatedAt, id }) => {
+  const createdTime = timeConverter(createdAt);
+  const updatedTime = timeConverter(updatedAt);
+
   useEffect(() => {
     AOS.init();
   }, []);
@@ -52,8 +58,22 @@ const UserCard = ({ name, email, bio, i, createdAt, updatedAt }) => {
             </Text>
           </Box>
           <Box display={"flex"} justifyContent={"space-evenly"}>
-            <Button>View</Button>
-            <Button>Edit</Button>
+            <ViewUserModal
+              name={name}
+              email={email}
+              bio={bio}
+              createdTime={createdTime}
+              updatedTime={updatedTime}
+              id={id}
+            />
+            <EditUserModal
+              name={name}
+              email={email}
+              bio={bio}
+              createdTime={createdTime}
+              updatedTime={updatedTime}
+              id={id}
+            />
             <Button>Delete</Button>
           </Box>
         </Stack>

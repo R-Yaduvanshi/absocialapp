@@ -8,7 +8,6 @@ import { getAllUsers } from "../redux/action";
 const UserList = () => {
   const dispatch = useDispatch();
   const { allUsers, isLoading, isError } = useSelector((store) => store);
-  console.log(allUsers);
   useEffect(() => {
     AOS.init();
   }, []);
@@ -38,6 +37,7 @@ const UserList = () => {
               createdAt={el.createdAt}
               updatedAt={el.updatedAt}
               i={i}
+              id={el._id}
             />
           );
         })}
