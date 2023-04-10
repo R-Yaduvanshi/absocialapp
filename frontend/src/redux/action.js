@@ -72,7 +72,7 @@ export const createPost = (payload) => async (dispatch) => {
 
   try {
     let res = await axios.post("http://localhost:7000/posts", payload);
-    console.log(res);
+    await dispatch({ type: types.CREATE_POST_SUCCESS });
     return "SUCCESS";
   } catch (err) {
     await dispatch({ type: types.CREATE_POST_FAILURE });
