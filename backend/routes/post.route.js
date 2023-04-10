@@ -109,8 +109,22 @@ app.put("/:id/like", async (req, res) => {
 });
 
 // <=====================================  Unlike post <=======================================>
+
 app.put("/:id/unlike", async (req, res) => {
   const postID = req.params.id;
+
+  // Here i am checking if the like is 0 then you cannot dislike
+  try {
+    let data = await PostModel.findById(postID);
+    if (data.likes == 0) {
+      res.send({ message: "You cannot Dislike" });
+    }
+  } catch (err) {
+    console.log(err);
+    res.send({ message: "Something went wrong" });
+  }
+
+  // if not 0 then you can dislike
   try {
     let newLike = await PostModel.findOneAndUpdate(
       { _id: postID },
