@@ -43,6 +43,8 @@ const PostList = () => {
             id={el._id}
             name={el.name}
             key={el._id}
+            zoom={"zoom-in"}
+            width={"sm"}
           />
         );
       })}

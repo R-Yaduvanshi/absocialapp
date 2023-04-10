@@ -26,7 +26,8 @@ import {
 import EditPostModal from "../modals/EditPostModal";
 import AOS from "aos";
 import "aos/dist/aos.css";
-const PostCard = ({ user_id, content, likes, id, name }) => {
+
+const PostCard = ({ user_id, content, likes, id, name, zoom, width }) => {
   const dispatch = useDispatch();
   const { currentLikePost, currentDisLikePost } = useSelector((store) => store);
   const toast = useToast();
@@ -109,12 +110,12 @@ const PostCard = ({ user_id, content, likes, id, name }) => {
   }, []);
   return (
     <Card
-      maxW="sm"
+      maxW={width}
       border={"3px solid #ccff33"}
       key={id}
       variant={"outline"}
       colorScheme="facebook"
-      data-aos="zoom-in"
+      data-aos={zoom}
       data-aos-delay={900}
     >
       <CardHeader>
