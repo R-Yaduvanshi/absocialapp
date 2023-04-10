@@ -139,6 +139,25 @@ export const reducer = (oldState = initialState, { type, payload }) => {
         isError: true,
         isLoading: false,
       };
+
+    // <============================ Edit Post Reducer <==========================================>
+
+    case types.EDIT_POST_REQUEST:
+      return {
+        ...oldState,
+        isLoading: true,
+      };
+    case types.EDIT_POST_SUCCESS:
+      return {
+        ...oldState,
+        isLoading: false,
+      };
+    case types.EDIT_POST_FAILURE:
+      return {
+        ...oldState,
+        isLoading: false,
+        isError: true,
+      };
     default:
       return oldState;
   }

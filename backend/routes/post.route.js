@@ -58,7 +58,7 @@ app.put("/posts/:id", async (req, res) => {
   const postID = req.params.id;
   try {
     const updatePost = await PostModel.findByIdAndUpdate(postID, req.body);
-    res.status(200).send({ message: "Post updated Success" });
+    res.status(200).send({ message: "Update Successfull" });
   } catch (err) {
     res.status(500).send({ message: "Something went wrong" });
     console.log(err);
@@ -78,7 +78,7 @@ app.delete("/posts/:id", async (req, res) => {
   }
 });
 
-// <===================================== Delete a post by id. <=======================================>
+// <=====================================  get All post <=======================================>
 
 app.get("/getallpost", async (req, res) => {
   try {

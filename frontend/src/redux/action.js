@@ -36,7 +36,7 @@ export const getSingleUser = (id) => async (dispatch) => {
 
   try {
     let res = axios.get(`http://localhost:7000/users/${id}`);
-    console.log(res);
+    // console.log(res);
   } catch (err) {
     await dispatch({ type: types.GET_SINGLE_USER_FAILURE });
     return "FAILED";
@@ -123,3 +123,20 @@ export const deletePostRequest = (id) => async (dispatch) => {
     return "FAILED";
   }
 };
+
+// <============================ Edit Post Action <==========================================>
+
+export const editPost =
+  ({ payload, id }) =>
+  async (dispatch) => {
+    await dispatch({ type: types.EDIT_POST_REQUEST });
+    try {
+      let res = await axios.put(`http://localhost:7000/posts/${id}`, payload);
+      console.log("response=>", res);
+      return "SUCCESS";
+    } catch (err) {
+      await dispatch({ type: types.EDIT_POST_FAILURE });
+      console.log(err);
+      return "FAILED";
+    }
+  };
