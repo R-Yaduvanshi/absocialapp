@@ -100,7 +100,7 @@ export const createPost = (payload) => async (dispatch) => {
 export const getAllPost = () => async (dispatch) => {
   await dispatch({ type: types.GET_ALL_POST_REQUEST });
   try {
-    let res = await axios.get("http://localhost:7000/getallpost");
+    let res = await axios.get("http://localhost:7000/posts/all/getall");
     await dispatch({ type: types.GET_ALL_POST_SUCCESS, payload: res.data });
     return "SUCCESS";
   } catch (err) {

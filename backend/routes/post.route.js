@@ -6,7 +6,7 @@ require("dotenv").config();
 
 // <==================================== Create a new post. <========================================>
 
-app.post("/posts", async (req, res) => {
+app.post("/", async (req, res) => {
   const { user_id, content, likes, name } = req.body;
   let userExit;
   try {
@@ -37,7 +37,7 @@ app.post("/posts", async (req, res) => {
 
 // <==================================== Retrieve a post by id. <====================================>
 
-app.get("/posts/:id", async (req, res) => {
+app.get("/:id", async (req, res) => {
   const postID = req.params.id;
 
   try {
@@ -48,13 +48,15 @@ app.get("/posts/:id", async (req, res) => {
 
     res.status(200).send(postIdExit);
   } catch (err) {
-    res.status(400).send({ message: "Something went wrong" });
+    res
+      .status(400)
+      .send({ message: "Something went wrong yyyyyyyyyyyyyyyyyyyyyyyyyyyyyy" });
   }
 });
 
 // <================================= Retrieve a post by id and update <=======================================>
 
-app.put("/posts/:id", async (req, res) => {
+app.put("/:id", async (req, res) => {
   const postID = req.params.id;
   try {
     const updatePost = await PostModel.findByIdAndUpdate(postID, req.body);
@@ -67,7 +69,7 @@ app.put("/posts/:id", async (req, res) => {
 
 // <===================================== Delete a post by id. <=======================================>
 
-app.delete("/posts/:id", async (req, res) => {
+app.delete("/:id", async (req, res) => {
   const postID = req.params.id;
   try {
     await PostModel.findByIdAndDelete(postID);
@@ -80,13 +82,19 @@ app.delete("/posts/:id", async (req, res) => {
 
 // <=====================================  get All post <=======================================>
 
-app.get("/getallpost", async (req, res) => {
+app.get("/all/getall", async (req, res) => {
   try {
     const allPost = await PostModel.find();
     res.status(200).send(allPost);
   } catch (err) {
     console.log(err);
-    res.status(500).send({ message: "Something went wrong" });
+    res.status(500).send({ message: "Something went wrong zzzzzzzzzzzzzzzzz" });
   }
+});
+
+// <=====================================  Like post <=======================================>
+
+app.put("/:id/like", async (req, res) => {
+  res.send("like");
 });
 module.exports = app;

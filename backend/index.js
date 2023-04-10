@@ -14,11 +14,12 @@ app.get("/", (req, res) => {
 });
 
 // Users route
+
 app.use("/", Users);
 
 // <================================== Post Routes <=================================================>
 
-app.use("/", Posts);
+app.use("/posts", Posts);
 
 app.listen(PORT, async () => {
   try {
