@@ -16,7 +16,7 @@ const postSchema = new mongoose.Schema(
       type: Number,
       default: 0,
       validate(value) {
-        if (!validator.isNumeric(String(value), { no_symbols: true })) {
+        if (!validator.isNumeric(String(value), { no_symbols: false })) {
           throw Error("Likes or Dislike should not be a negative number");
         }
       },

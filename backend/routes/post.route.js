@@ -110,6 +110,18 @@ app.put("/:id/like", async (req, res) => {
 
 // <=====================================  Unlike post <=======================================>
 app.put("/:id/unlike", async (req, res) => {
-  res.send("like");
+  const postID = req.params.id;
+  try {
+    let newLike = await PostModel.findOneAndUpdate(
+      { _id: postID },
+      { $inc: { likes: -1 } },
+      { new: true }
+    );
+    console.log("Post likes increased: ", newLike.likes);
+    res.send(newLike);
+  } catch (err) {
+    console.log(err);
+    res.status(400).send({ message: "Something went wrong" });
+  }
 });
 module.exports = app;
