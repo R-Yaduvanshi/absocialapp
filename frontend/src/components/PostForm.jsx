@@ -102,7 +102,7 @@ const PostForm = () => {
   }, [flag]);
 
   return (
-    <Box p="10px" minHeight={"88vh"}>
+    <Box p="10px" minHeight={"100vh"} mt="15vh">
       <Flex justifyContent={"center"}>
         <Button colorScheme={"whatsapp"} onClick={handleRandomLogin}>
           Please Click To Login a Random User

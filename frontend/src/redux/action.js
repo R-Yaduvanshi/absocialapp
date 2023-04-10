@@ -109,7 +109,7 @@ export const getAllPost = () => async (dispatch) => {
   }
 };
 
-// <============================ Get All Post Action <==========================================>
+// <============================ Delete Post Action <==========================================>
 
 export const deletePostRequest = (id) => async (dispatch) => {
   await dispatch({ type: types.DELETE_POST_REQUEST });

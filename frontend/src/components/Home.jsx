@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const Home = () => {
   const navigate = useNavigate();
   return (
-    <Container maxW={"60%"} h="88vh">
+    <Container maxW={"60%"} h="100vh" mt="12vh">
       <SimpleGrid columns={3} spacing={10} pt="20px">
         <Button colorScheme="linkedin" onClick={() => navigate("/users")}>
           Create User

@@ -70,7 +70,7 @@ const EditPostModal = ({ content, id }) => {
             </Flex>
           </ModalBody>
           <ModalFooter display={"flex"} justifyContent={"space-between"}>
-            <Button onClick={handleEdit}>Edit</Button>
+            <Button onClick={handleEdit}>Update</Button>
             <Button onClick={onClose}>Close</Button>
           </ModalFooter>
         </ModalContent>

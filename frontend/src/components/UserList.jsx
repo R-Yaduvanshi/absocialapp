@@ -16,7 +16,7 @@ const UserList = () => {
     let output = dispatch(getAllUsers());
   }, []);
   return (
-    <Box p="10px" minH={"88vh"}>
+    <Box p="10px" minH={"100vh"} mt="12vh">
       <Text
         fontSize={"18px"}
         textAlign={"center"}

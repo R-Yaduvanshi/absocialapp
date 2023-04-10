@@ -13,7 +13,7 @@ const PostList = () => {
   return (
     <Flex
       p="10px"
-      minH={"88vh"}
+      minH={"100vh"}
       border={"1px"}
       w="100%"
       justifyContent={"center"}
@@ -22,6 +22,7 @@ const PostList = () => {
       bg={"black"}
       flexDir={"column"}
       gap="15px"
+      mt="12vh"
     >
       {allPosts?.map((el) => {
         return (

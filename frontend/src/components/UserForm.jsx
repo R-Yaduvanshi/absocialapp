@@ -102,7 +102,13 @@ const UserForm = () => {
     }
   };
   return (
-    <Box p="10px" minH={"88vh"} display={"grid"} placeItems={"center"}>
+    <Box
+      p="10px"
+      minH={"100vh"}
+      display={"grid"}
+      placeItems={"center"}
+      mt="12vh"
+    >
       <Flex
         w={["100%", "80%", "", "60%", "60%"]}
         minH={"82vh"}

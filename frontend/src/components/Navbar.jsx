@@ -11,6 +11,10 @@ const Navbar = () => {
       alignItems={"center"}
       bgGradient="linear(to-r, #f1c0e8, #cfbaf0)"
       w="100%"
+      position={"fixed"}
+      top="0px"
+      right={"0px"}
+      zIndex={"1000"}
     >
       <Text
         fontWeight={"600"}

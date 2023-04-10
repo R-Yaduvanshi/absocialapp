@@ -13,13 +13,15 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { MdDeleteOutline } from "react-icons/md";
-import { BiLike, BiEdit } from "react-icons/bi";
+import { BiLike, BiEdit, BiDislike } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import "aos/dist/aos.css";
 import { deletePostRequest, getAllPost } from "../redux/action";
 import EditPostModal from "../modals/EditPostModal";
+import AOS from "aos";
+import "aos/dist/aos.css";
 const PostCard = ({ user_id, content, likes, id, name }) => {
   const { allUsers } = useSelector((store) => store);
   const dispatch = useDispatch();
@@ -47,8 +49,20 @@ const PostCard = ({ user_id, content, likes, id, name }) => {
       });
     }
   };
+
+  useEffect(() => {
+    AOS.init();
+  }, []);
   return (
-    <Card maxW="md" border={"3px solid #ccff33"} key={id}>
+    <Card
+      maxW="sm"
+      border={"3px solid #ccff33"}
+      key={id}
+      variant={"outline"}
+      colorScheme="facebook"
+      data-aos="zoom-in"
+      data-aos-delay={900}
+    >
       <CardHeader>
         <Flex spacing="4">
           <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
@@ -84,6 +98,9 @@ const PostCard = ({ user_id, content, likes, id, name }) => {
       >
         <Button flex="1" variant="ghost" leftIcon={<BiLike />}>
           Like {likes}
+        </Button>
+        <Button flex="1" variant="ghost" leftIcon={<BiDislike />}>
+          Unlike
         </Button>
         <EditPostModal content={content} id={id} />
         <Button
