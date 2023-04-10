@@ -20,7 +20,7 @@ export const createUser = (payload) => async (dispatch) => {
 export const getAllUsers = () => async (dispatch) => {
   await dispatch({ type: types.GET_ALL_USER_REQUEST });
   try {
-    let res = await axios.get("http://localhost:7000/allusers");
+    let res = await axios.get("http://localhost:7000/users/all/getall");
     await dispatch({ type: types.GET_ALL_USER_SUCCESS, payload: res.data });
     return "SUCCESS";
   } catch (err) {
@@ -132,7 +132,7 @@ export const editPost =
     await dispatch({ type: types.EDIT_POST_REQUEST });
     try {
       let res = await axios.put(`http://localhost:7000/posts/${id}`, payload);
-      console.log("response=>", res);
+      await dispatch({ type: types.EDIT_POST_SUCCESS });
       return "SUCCESS";
     } catch (err) {
       await dispatch({ type: types.EDIT_POST_FAILURE });

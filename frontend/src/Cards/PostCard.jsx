@@ -8,7 +8,6 @@ import {
   CardHeader,
   Flex,
   Heading,
-  IconButton,
   Image,
   Text,
   useToast,
@@ -23,7 +22,6 @@ import EditPostModal from "../modals/EditPostModal";
 import AOS from "aos";
 import "aos/dist/aos.css";
 const PostCard = ({ user_id, content, likes, id, name }) => {
-  const { allUsers } = useSelector((store) => store);
   const dispatch = useDispatch();
   const toast = useToast();
   const handleDeletePost = async (id) => {

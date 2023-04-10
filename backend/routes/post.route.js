@@ -48,9 +48,7 @@ app.get("/:id", async (req, res) => {
 
     res.status(200).send(postIdExit);
   } catch (err) {
-    res
-      .status(400)
-      .send({ message: "Something went wrong yyyyyyyyyyyyyyyyyyyyyyyyyyyyyy" });
+    res.status(400).send({ message: "Something went wrong" });
   }
 });
 
@@ -88,13 +86,30 @@ app.get("/all/getall", async (req, res) => {
     res.status(200).send(allPost);
   } catch (err) {
     console.log(err);
-    res.status(500).send({ message: "Something went wrong zzzzzzzzzzzzzzzzz" });
+    res.status(500).send({ message: "Something went wrong" });
   }
 });
 
 // <=====================================  Like post <=======================================>
 
 app.put("/:id/like", async (req, res) => {
+  const postID = req.params.id;
+  try {
+    let newLike = await PostModel.findOneAndUpdate(
+      { _id: postID },
+      { $inc: { likes: 1 } },
+      { new: true }
+    );
+    console.log("Post likes increased: ", newLike.likes);
+    res.send(newLike);
+  } catch (err) {
+    console.log(err);
+    res.status(400).send({ message: "Something went wrong" });
+  }
+});
+
+// <=====================================  Unlike post <=======================================>
+app.put("/:id/unlike", async (req, res) => {
   res.send("like");
 });
 module.exports = app;

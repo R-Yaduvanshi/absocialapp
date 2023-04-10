@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
 
 // Users route
 
-app.use("/", Users);
+app.use("/users", Users);
 
 // <================================== Post Routes <=================================================>
 

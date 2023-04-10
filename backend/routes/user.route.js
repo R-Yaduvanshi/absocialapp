@@ -4,7 +4,7 @@ const { Users } = require("../userModel/User.model");
 const app = express.Router();
 
 //<==================================> Creating Users <==========================================>
-app.post("/users", async (req, res) => {
+app.post("/", async (req, res) => {
   const { name, email, bio } = req.body;
 
   if (!name || !email)
@@ -47,7 +47,7 @@ app.post("/users", async (req, res) => {
 
 // <============================> Retrieve a user by id. <=======================================>
 
-app.get("/users/:id", async (req, res) => {
+app.get("/:id", async (req, res) => {
   try {
     const user = await Users.findById(req.params.id);
     if (!user) {
@@ -62,7 +62,7 @@ app.get("/users/:id", async (req, res) => {
 
 //<========================== Update a user's name or bio by id <====================================>
 
-app.put("/users/:id", async (req, res) => {
+app.put("/:id", async (req, res) => {
   const userID = req.params.id;
   try {
     const updateUser = await Users.findByIdAndUpdate(userID, req.body);
@@ -75,7 +75,7 @@ app.put("/users/:id", async (req, res) => {
 
 // <=================================== Delete a user by id. <======================================>
 
-app.delete("/users/:id", async (req, res) => {
+app.delete("/:id", async (req, res) => {
   const userID = req.params.id;
   try {
     await Users.findByIdAndDelete(userID);
@@ -101,7 +101,7 @@ app.get("/analytics/users", async (req, res) => {
 
 // Get All User
 
-app.get("/allusers", async (req, res) => {
+app.get("/all/getall", async (req, res) => {
   try {
     const allUser = await Users.find();
     res.status(200).send(allUser);
