@@ -154,3 +154,17 @@ export const likePost = (id) => async (dispatch) => {
     return "FAILED";
   }
 };
+
+// <============================ DisLike Post Action <==========================================>
+
+export const dislikePost = (id) => async (dispatch) => {
+  try {
+    let res = await axios.put(`http://localhost:7000/posts/${id}/unlike`);
+    await dispatch({ type: types.DISLIKE_POST_SUCCESS, payload: res.data });
+    return "SUCCESS";
+  } catch (err) {
+    console.log(err);
+    await dispatch({ type: types.DISLIKE_POST_FAILURE });
+    return "FAILED";
+  }
+};

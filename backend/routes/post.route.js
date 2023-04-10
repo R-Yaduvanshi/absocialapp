@@ -100,7 +100,6 @@ app.put("/:id/like", async (req, res) => {
       { $inc: { likes: 1 } },
       { new: true }
     );
-    console.log("Post likes increased: ", newLike.likes);
     res.send(newLike);
   } catch (err) {
     console.log(err);
@@ -131,7 +130,6 @@ app.put("/:id/unlike", async (req, res) => {
       { $inc: { likes: -1 } },
       { new: true }
     );
-    console.log("Post likes increased: ", newLike.likes);
     res.send(newLike);
   } catch (err) {
     console.log(err);

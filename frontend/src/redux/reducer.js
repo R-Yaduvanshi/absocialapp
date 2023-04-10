@@ -6,7 +6,8 @@ const initialState = {
   currentUser: {},
   allUsers: [],
   allPosts: [],
-  currentLikePostID: {},
+  currentLikePost: {},
+  currentDisLikePost: {},
 };
 
 export const reducer = (oldState = initialState, { type, payload }) => {
@@ -165,15 +166,26 @@ export const reducer = (oldState = initialState, { type, payload }) => {
     case types.LIKE_POST_SUCCESS:
       return {
         ...oldState,
-        isLoading: false,
-        currentLikePostID: payload,
+        currentLikePost: payload,
       };
     case types.LIKE_POST_FAILURE:
       return {
         ...oldState,
-        isLoading: false,
         isError: true,
       };
+
+    // <============================ Like Post Reducer <==========================================>
+    case types.DISLIKE_POST_SUCCESS:
+      return {
+        ...oldState,
+        currentDisLikePost: payload,
+      };
+    case types.DISLIKE_POST_FAILURE:
+      return {
+        ...oldState,
+        isError: true,
+      };
+
     default:
       return oldState;
   }
