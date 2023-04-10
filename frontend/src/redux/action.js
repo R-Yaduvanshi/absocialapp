@@ -59,3 +59,9 @@ export const deleteUser = (id) => async (dispatch) => {
     return "FAILED";
   }
 };
+
+// <============================ Set Random Action <==========================================>
+
+export const getRandomUser = (payload) => async (dispatch) => {
+  await dispatch({ type: types.RANDOM_USER_SUCCESS, payload: payload });
+};

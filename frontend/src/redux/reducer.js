@@ -88,6 +88,14 @@ export const reducer = (oldState = initialState, { type, payload }) => {
         isError: true,
       };
 
+    // <============================ Random User Reducer <==========================================>
+
+    case types.RANDOM_USER_SUCCESS:
+      return {
+        ...oldState,
+        isLoading: false,
+        currentUser: payload,
+      };
     default:
       return oldState;
   }
