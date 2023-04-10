@@ -1,15 +1,26 @@
 import { Box, Container, Flex, Icon, SimpleGrid, Text } from "@chakra-ui/react";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllPost } from "../redux/action";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import PostCard from "../Cards/PostCard";
-const PostAnalytics = () => {
-  const { allPosts } = useSelector((store) => store);
-  const dispatch = useDispatch();
+import axios from "axios";
 
+let getTotalPost = async () => {
+  let res = await axios.get("http://localhost:7000/analytics/posts");
+  return res;
+};
+
+let getTopPost = async () => {
+  let res = await axios.get("http://localhost:7000/analytics/posts/top-liked");
+  return res;
+};
+const PostAnalytics = () => {
+  const [totalPost, setTotalPost] = useState("");
+  const [post, setPost] = useState([]);
   useEffect(() => {
-    dispatch(getAllPost());
+    getTotalPost().then((res) => setTotalPost(res.data.total));
+    getTopPost().then((res) => setPost(res.data));
   }, []);
   return (
     <Box p="10px" minH={"88vh"} mt="12vh">
@@ -22,7 +33,7 @@ const PostAnalytics = () => {
         <Text
           bgGradient="linear(to-l, #7928CA, #FF0080)"
           bgClip="text"
-          fontSize="2xl"
+          fontSize={["20px", "20px", "28px", "", ""]}
           fontWeight="extrabold"
         >
           Total Number Of Posts
@@ -34,7 +45,7 @@ const PostAnalytics = () => {
           fontSize="2xl"
           fontWeight="extrabold"
         >
-          {allPosts.length}
+          {totalPost}
         </Text>
       </Container>
       {/* Top 5 Post */}
@@ -48,23 +59,20 @@ const PostAnalytics = () => {
       >
         Top 5 Posts
       </Text>
-      <SimpleGrid columns={3} spacing={5}>
-        {allPosts
-          ?.sort((a, b) => b.likes - a.likes)
-          ?.filter((el, i) => i < 5)
-          ?.map((el) => {
-            return (
-              <PostCard
-                user_id={el.user_id}
-                content={el.content}
-                likes={el.likes}
-                id={el._id}
-                name={el.name}
-                key={el._id}
-                width={"80%"}
-              />
-            );
-          })}
+      <SimpleGrid columns={["1", "1", "2", "3", "3"]} spacing={5}>
+        {post?.map((el) => {
+          return (
+            <PostCard
+              user_id={el.user_id}
+              content={el.content}
+              likes={el.likes}
+              id={el._id}
+              name={el.name}
+              key={el._id}
+              width={"80%"}
+            />
+          );
+        })}
       </SimpleGrid>
     </Box>
   );

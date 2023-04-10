@@ -4,6 +4,7 @@ const app = express();
 const cors = require("cors");
 const Users = require("./routes/user.route");
 const Posts = require("./routes/post.route");
+const Analytics = require("./routes/post.analytics");
 require("dotenv").config();
 app.use(express.json());
 const PORT = process.env.PORT || 7000;
@@ -20,6 +21,8 @@ app.use("/users", Users);
 // <================================== Post Routes <=================================================>
 
 app.use("/posts", Posts);
+
+app.use("/analytics", Analytics);
 
 app.listen(PORT, async () => {
   try {
