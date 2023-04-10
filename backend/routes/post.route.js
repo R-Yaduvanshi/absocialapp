@@ -7,7 +7,7 @@ require("dotenv").config();
 // <==================================== Create a new post. <========================================>
 
 app.post("/posts", async (req, res) => {
-  const { user_id, content, likes } = req.body;
+  const { user_id, content, likes, name } = req.body;
   let userExit;
   try {
     userExit = await Users.findById(user_id);
@@ -16,7 +16,7 @@ app.post("/posts", async (req, res) => {
     }
 
     // Create new Post
-    const post = new PostModel({ user_id, content, likes });
+    const post = new PostModel({ user_id, content, likes, name });
     await post.save();
 
     res.status(201).send(post);

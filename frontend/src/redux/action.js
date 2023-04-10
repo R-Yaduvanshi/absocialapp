@@ -29,6 +29,20 @@ export const getAllUsers = () => async (dispatch) => {
   }
 };
 
+// <============================ Get Single User Action <==========================================>
+
+export const getSingleUser = (id) => async (dispatch) => {
+  await dispatch({ type: types.GET_SINGLE_USER_REQUEST });
+
+  try {
+    let res = axios.get(`http://localhost:7000/users/${id}`);
+    console.log(res);
+  } catch (err) {
+    await dispatch({ type: types.GET_SINGLE_USER_FAILURE });
+    return "FAILED";
+  }
+};
+
 // <============================ Edit User Action <==========================================>
 
 export const editUser =
@@ -67,6 +81,7 @@ export const getRandomUser = (payload) => async (dispatch) => {
 };
 
 // <============================ Create POst Action <==========================================>
+
 export const createPost = (payload) => async (dispatch) => {
   await dispatch({ type: types.CREATE_POST_REQUEST });
 
@@ -82,4 +97,29 @@ export const createPost = (payload) => async (dispatch) => {
 
 // <============================ Get All Post Action <==========================================>
 
-export const getAllPost = () => async () => {};
+export const getAllPost = () => async (dispatch) => {
+  await dispatch({ type: types.GET_ALL_POST_REQUEST });
+  try {
+    let res = await axios.get("http://localhost:7000/getallpost");
+    await dispatch({ type: types.GET_ALL_POST_SUCCESS, payload: res.data });
+    return "SUCCESS";
+  } catch (err) {
+    await dispatch({ type: types.GET_ALL_POST_FAILURE });
+    return "FAILED";
+  }
+};
+
+// <============================ Get All Post Action <==========================================>
+
+export const deletePostRequest = (id) => async (dispatch) => {
+  await dispatch({ type: types.DELETE_POST_REQUEST });
+
+  try {
+    let res = await axios.delete(`http://localhost:7000/posts/${id}`);
+    await dispatch({ type: types.DELETE_POST_SUCCESS });
+    return "SUCCESS";
+  } catch (err) {
+    await dispatch({ type: types.DELETE_POST_FAILURE });
+    return "FAILED";
+  }
+};

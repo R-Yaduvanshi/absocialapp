@@ -11,36 +11,67 @@ import {
   IconButton,
   Image,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import React from "react";
 import { MdDeleteOutline } from "react-icons/md";
 import { BiLike, BiEdit } from "react-icons/bi";
-const PostCard = () => {
+import { useDispatch, useSelector } from "react-redux";
+import "aos/dist/aos.css";
+import { deletePostRequest, getAllPost } from "../redux/action";
+const PostCard = ({ user_id, content, likes, id, name }) => {
+  const { allUsers } = useSelector((store) => store);
+  const dispatch = useDispatch();
+  const toast = useToast();
+  //   console.log(allUsers);
+  //   console.log(user_id);
+  const handleDeletePost = async (id) => {
+    let res = await dispatch(deletePostRequest(id));
+
+    if (res == "SUCCESS") {
+      toast({
+        title: "Post Deleted",
+        description: "You deleted your post successfully .",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        position: "top",
+      });
+      dispatch(getAllPost());
+    } else {
+      toast({
+        description: "Something went wrong",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "top",
+      });
+    }
+  };
   return (
-    <Card maxW="md" border={"3px solid #ccff33"}>
+    <Card maxW="md" border={"3px solid #ccff33"} key={id}>
       <CardHeader>
         <Flex spacing="4">
           <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
-            <Avatar name="Segun Adebayo" src="https://bit.ly/sage-adebayo" />
+            <Avatar
+              name="Segun Adebayo"
+              src="https://xsgames.co/randomusers/avatar.php?g=pixel"
+            />
 
             <Box>
-              <Heading size="sm">Segun Adebayo</Heading>
-              <Text>Creator, Chakra UI</Text>
+              <Heading size="sm"> {name ? name : "Segun Adebayo"}</Heading>
+              <Text>Jr. Developer</Text>
             </Box>
           </Flex>
         </Flex>
       </CardHeader>
       <CardBody>
-        <Text>
-          With Chakra UI, I wanted to sync the speed of development with the
-          speed of design. I wanted the developer to be just as excited as the
-          designer to create a screen.
-        </Text>
+        <Text>{content}</Text>
       </CardBody>
       <Image
         objectFit="cover"
-        src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-        alt="Chakra UI"
+        src="https://random.imagecdn.app/500/250"
+        alt="post photo"
       />
 
       <CardFooter
@@ -53,12 +84,17 @@ const PostCard = () => {
         }}
       >
         <Button flex="1" variant="ghost" leftIcon={<BiLike />}>
-          Like 0
+          Like {likes}
         </Button>
         <Button flex="1" variant="ghost" leftIcon={<BiEdit />}>
           Edit
         </Button>
-        <Button flex="1" variant="ghost" leftIcon={<MdDeleteOutline />}>
+        <Button
+          flex="1"
+          variant="ghost"
+          leftIcon={<MdDeleteOutline />}
+          onClick={() => handleDeletePost(id)}
+        >
           Delete
         </Button>
       </CardFooter>

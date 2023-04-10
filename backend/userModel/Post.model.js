@@ -3,6 +3,7 @@ const validator = require("validator");
 const postSchema = new mongoose.Schema(
   {
     user_id: String,
+    name: String,
     content: {
       type: String,
       validate(value) {

@@ -5,6 +5,7 @@ const initialState = {
   isError: false,
   currentUser: {},
   allUsers: [],
+  allPosts: [],
 };
 
 export const reducer = (oldState = initialState, { type, payload }) => {
@@ -70,7 +71,7 @@ export const reducer = (oldState = initialState, { type, payload }) => {
         isError: true,
       };
 
-    // <============================ Edit User Reducer <==========================================>
+    // <============================ Delete User Reducer <==========================================>
     case types.DELETE_USER_REQUEST:
       return {
         ...oldState,
@@ -112,6 +113,27 @@ export const reducer = (oldState = initialState, { type, payload }) => {
       };
 
     case types.CREATE_POST_FAILURE:
+      return {
+        ...oldState,
+        isError: true,
+        isLoading: false,
+      };
+    // <============================ Get All Post Reducer <==========================================>
+
+    case types.GET_ALL_POST_REQUEST:
+      return {
+        ...oldState,
+        isLoading: true,
+      };
+
+    case types.GET_ALL_POST_SUCCESS:
+      return {
+        ...oldState,
+        isLoading: false,
+        allPosts: payload,
+      };
+
+    case types.GET_ALL_POST_FAILURE:
       return {
         ...oldState,
         isError: true,

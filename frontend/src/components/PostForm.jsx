@@ -56,6 +56,7 @@ const PostForm = () => {
     }
     const payload = {
       user_id: currentUser._id,
+      name: currentUser.name,
       content: content,
     };
     let res = await dispatch(createPost(payload));
