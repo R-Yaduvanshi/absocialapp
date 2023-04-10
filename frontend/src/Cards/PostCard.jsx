@@ -17,12 +17,13 @@ import { MdDeleteOutline } from "react-icons/md";
 import { BiLike, BiEdit, BiDislike } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import "aos/dist/aos.css";
-import { deletePostRequest, getAllPost } from "../redux/action";
+import { deletePostRequest, getAllPost, likePost } from "../redux/action";
 import EditPostModal from "../modals/EditPostModal";
 import AOS from "aos";
 import "aos/dist/aos.css";
 const PostCard = ({ user_id, content, likes, id, name }) => {
   const dispatch = useDispatch();
+  const { currentLikePostID } = useSelector((store) => store);
   const toast = useToast();
   const handleDeletePost = async (id) => {
     let res = await dispatch(deletePostRequest(id));
@@ -48,6 +49,29 @@ const PostCard = ({ user_id, content, likes, id, name }) => {
     }
   };
 
+  // Handle Like
+  const handleLike = async (id) => {
+    // console.log("CheckID=>>", currentLikePostID._id);
+    // console.log("prevID=>", id);
+    if (currentLikePostID._id == id) {
+      return toast({
+        description: "You have already Like this post",
+        status: "error",
+        duration: 1000,
+        isClosable: true,
+        position: "top",
+      });
+    }
+    let res = await dispatch(likePost(id));
+    await dispatch(getAllPost());
+    toast({
+      description: "woohoo! You like this post",
+      status: "success",
+      duration: 1000,
+      isClosable: true,
+      position: "top",
+    });
+  };
   useEffect(() => {
     AOS.init();
   }, []);
@@ -94,7 +118,12 @@ const PostCard = ({ user_id, content, likes, id, name }) => {
           },
         }}
       >
-        <Button flex="1" variant="ghost" leftIcon={<BiLike />}>
+        <Button
+          flex="1"
+          variant="ghost"
+          leftIcon={<BiLike />}
+          onClick={() => handleLike(id)}
+        >
           Like {likes}
         </Button>
         <Button flex="1" variant="ghost" leftIcon={<BiDislike />}>

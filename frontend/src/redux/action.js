@@ -140,3 +140,17 @@ export const editPost =
       return "FAILED";
     }
   };
+
+// <============================ Like Post Action <==========================================>
+
+export const likePost = (id) => async (dispatch) => {
+  try {
+    let res = await axios.put(`http://localhost:7000/posts/${id}/like`);
+    await dispatch({ type: types.LIKE_POST_SUCCESS, payload: res.data });
+    return "SUCCESS";
+  } catch (err) {
+    console.log(err);
+    await dispatch({ type: types.LIKE_POST_FAILURE });
+    return "FAILED";
+  }
+};

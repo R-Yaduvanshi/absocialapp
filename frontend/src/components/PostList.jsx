@@ -11,19 +11,6 @@ const PostList = () => {
     dispatch(getAllPost());
   }, []);
 
-  if (isLoading) {
-    return (
-      <Grid placeItems={"center"} mt="12vh" h="88vh">
-        <Spinner
-          thickness="4px"
-          speed="0.65s"
-          emptyColor="gray.200"
-          color="blue.500"
-          size="xl"
-        />
-      </Grid>
-    );
-  }
   if (isError) {
     return (
       <Grid placeItems={"center"} mt="12vh" h="88vh">

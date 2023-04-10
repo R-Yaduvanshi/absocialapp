@@ -6,6 +6,7 @@ const initialState = {
   currentUser: {},
   allUsers: [],
   allPosts: [],
+  currentLikePostID: {},
 };
 
 export const reducer = (oldState = initialState, { type, payload }) => {
@@ -153,6 +154,21 @@ export const reducer = (oldState = initialState, { type, payload }) => {
         isLoading: false,
       };
     case types.EDIT_POST_FAILURE:
+      return {
+        ...oldState,
+        isLoading: false,
+        isError: true,
+      };
+
+    // <============================ Like Post Reducer <==========================================>
+
+    case types.LIKE_POST_SUCCESS:
+      return {
+        ...oldState,
+        isLoading: false,
+        currentLikePostID: payload,
+      };
+    case types.LIKE_POST_FAILURE:
       return {
         ...oldState,
         isLoading: false,
