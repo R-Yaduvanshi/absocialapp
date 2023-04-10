@@ -79,3 +79,7 @@ export const createPost = (payload) => async (dispatch) => {
     return "FAILED";
   }
 };
+
+// <============================ Get All Post Action <==========================================>
+
+export const getAllPost = () => async () => {};

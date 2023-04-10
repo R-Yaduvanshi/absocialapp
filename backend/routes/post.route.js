@@ -52,7 +52,7 @@ app.get("/posts/:id", async (req, res) => {
   }
 });
 
-// <================================= Retrieve a post by id. <=======================================>
+// <================================= Retrieve a post by id and update <=======================================>
 
 app.put("/posts/:id", async (req, res) => {
   const postID = req.params.id;
@@ -72,6 +72,18 @@ app.delete("/posts/:id", async (req, res) => {
   try {
     await PostModel.findByIdAndDelete(postID);
     res.status(200).send({ message: "Post Deleted Successfull" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ message: "Something went wrong" });
+  }
+});
+
+// <===================================== Delete a post by id. <=======================================>
+
+app.get("/getallpost", async (req, res) => {
+  try {
+    const allPost = await PostModel.find();
+    res.status(200).send(allPost);
   } catch (err) {
     console.log(err);
     res.status(500).send({ message: "Something went wrong" });

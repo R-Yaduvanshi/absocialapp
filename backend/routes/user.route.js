@@ -91,8 +91,8 @@ app.delete("/users/:id", async (req, res) => {
 app.get("/analytics/users", async (req, res) => {
   try {
     const allUser = await Users.find();
-    // res.send({ total_users: allUser.length });
-    res.send(allUser);
+    res.send({ total_users: allUser.length });
+    // res.send(allUser);
   } catch (err) {
     console.log(err);
     res.status(500).send({ message: "Something went wrong" });
