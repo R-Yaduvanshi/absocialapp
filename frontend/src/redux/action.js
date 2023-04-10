@@ -65,3 +65,17 @@ export const deleteUser = (id) => async (dispatch) => {
 export const getRandomUser = (payload) => async (dispatch) => {
   await dispatch({ type: types.RANDOM_USER_SUCCESS, payload: payload });
 };
+
+// <============================ Create POst Action <==========================================>
+export const createPost = (payload) => async (dispatch) => {
+  await dispatch({ type: types.CREATE_POST_REQUEST });
+
+  try {
+    let res = await axios.post("http://localhost:7000/posts", payload);
+    console.log(res);
+    return "SUCCESS";
+  } catch (err) {
+    await dispatch({ type: types.CREATE_POST_FAILURE });
+    return "FAILED";
+  }
+};

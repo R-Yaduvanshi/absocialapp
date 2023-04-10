@@ -10,7 +10,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getRandomIndex } from "../utils/randomIndex";
-import { getAllUsers, getRandomUser } from "../redux/action";
+import { createPost, getAllUsers, getRandomUser } from "../redux/action";
 
 const PostForm = () => {
   const { allUsers } = useSelector((store) => store);
@@ -35,7 +35,7 @@ const PostForm = () => {
     setButtonFlag(true);
   };
 
-  const handleCreatePost = () => {
+  const handleCreatePost = async () => {
     if (content.length == 0) {
       return toast({
         title: "Content cannot be blank",
@@ -58,15 +58,26 @@ const PostForm = () => {
       user_id: currentUser._id,
       content: content,
     };
-    console.log(payload);
-    toast({
-      title: "Post Created",
-      description: "Yoy have created your Post.",
-      status: "success",
-      duration: 9000,
-      isClosable: true,
-      position: "top",
-    });
+    let res = await dispatch(createPost(payload));
+    if (res == "SUCCESS") {
+      toast({
+        title: "Post Created",
+        description: "Yoy have created your Post.",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+        position: "top",
+      });
+      setContent("");
+    } else {
+      toast({
+        description: "Something went wrong",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+        position: "top",
+      });
+    }
   };
 
   useEffect(() => {

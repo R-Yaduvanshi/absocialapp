@@ -96,6 +96,27 @@ export const reducer = (oldState = initialState, { type, payload }) => {
         isLoading: false,
         currentUser: payload,
       };
+
+    // <============================ Create Post Reducer <==========================================>
+
+    case types.CREATE_POST_REQUEST:
+      return {
+        ...oldState,
+        isLoading: true,
+      };
+
+    case types.CREATE_POST_SUCCESS:
+      return {
+        ...oldState,
+        isLoading: false,
+      };
+
+    case types.CREATE_POST_FAILURE:
+      return {
+        ...oldState,
+        isError: true,
+        isLoading: false,
+      };
     default:
       return oldState;
   }
