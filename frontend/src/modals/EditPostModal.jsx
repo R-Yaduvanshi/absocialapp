@@ -37,7 +37,6 @@ const EditPostModal = ({ content, id, user_id }) => {
     const payload = {
       content: newContent || content,
     };
-    // console.log(payload, id);
     let res = await dispatch(editPost({ payload, id }));
 
     if (res === "SUCCESS") {
