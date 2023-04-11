@@ -7,12 +7,16 @@ import PostCard from "../Cards/PostCard";
 import axios from "axios";
 
 const getTotalPost = async () => {
-  let res = await axios.get("http://localhost:7000/analytics/posts");
+  let res = await axios.get(
+    "https://backendforadobeassignment-production.up.railway.app/analytics/posts"
+  );
   return res;
 };
 
 const getTopPost = async () => {
-  let res = await axios.get("http://localhost:7000/analytics/posts/top-liked");
+  let res = await axios.get(
+    "https://backendforadobeassignment-production.up.railway.app/analytics/posts/top-liked"
+  );
   return res;
 };
 const PostAnalytics = () => {

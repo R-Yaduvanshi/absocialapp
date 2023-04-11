@@ -6,7 +6,10 @@ import axios from "axios";
 export const createUser = (payload) => async (dispatch) => {
   await dispatch({ type: types.CREATE_USER_REQUEST });
   try {
-    let res = await axios.post("http://localhost:7000/users", payload);
+    let res = await axios.post(
+      "https://backendforadobeassignment-production.up.railway.app/users",
+      payload
+    );
     await dispatch({ type: types.CREATE_USER_SUCCESS, payload: res.data });
     return "SUCCESS";
   } catch (err) {
@@ -20,7 +23,9 @@ export const createUser = (payload) => async (dispatch) => {
 export const getAllUsers = () => async (dispatch) => {
   await dispatch({ type: types.GET_ALL_USER_REQUEST });
   try {
-    let res = await axios.get("http://localhost:7000/users/all/getall");
+    let res = await axios.get(
+      "https://backendforadobeassignment-production.up.railway.app/users/all/getall"
+    );
     await dispatch({ type: types.GET_ALL_USER_SUCCESS, payload: res.data });
     return "SUCCESS";
   } catch (err) {
@@ -35,7 +40,9 @@ export const getSingleUser = (id) => async (dispatch) => {
   await dispatch({ type: types.GET_SINGLE_USER_REQUEST });
 
   try {
-    let res = axios.get(`http://localhost:7000/users/${id}`);
+    let res = axios.get(
+      `https://backendforadobeassignment-production.up.railway.app/users/${id}`
+    );
     // console.log(res);
   } catch (err) {
     await dispatch({ type: types.GET_SINGLE_USER_FAILURE });
@@ -50,7 +57,10 @@ export const editUser =
   async (dispatch) => {
     await dispatch({ type: types.EDIT_USER_REQUEST });
     try {
-      let res = await axios.put(`http://localhost:7000/users/${id}`, payload);
+      let res = await axios.put(
+        `https://backendforadobeassignment-production.up.railway.app/users/${id}`,
+        payload
+      );
       await dispatch({ type: types.EDIT_USER_SUCCESS });
       return "SUCCESS";
     } catch (err) {
@@ -65,7 +75,9 @@ export const deleteUser = (id) => async (dispatch) => {
   await dispatch({ type: types.DELETE_USER_REQUEST });
 
   try {
-    let res = await axios.delete(`http://localhost:7000/users/${id}`);
+    let res = await axios.delete(
+      `https://backendforadobeassignment-production.up.railway.app/users/${id}`
+    );
     await dispatch({ type: types.DELETE_USER_SUCCESS });
     return "SUCCESS";
   } catch (err) {
@@ -86,7 +98,10 @@ export const createPost = (payload) => async (dispatch) => {
   await dispatch({ type: types.CREATE_POST_REQUEST });
 
   try {
-    let res = await axios.post("http://localhost:7000/posts", payload);
+    let res = await axios.post(
+      "https://backendforadobeassignment-production.up.railway.app/posts",
+      payload
+    );
     await dispatch({ type: types.CREATE_POST_SUCCESS });
     return "SUCCESS";
   } catch (err) {
@@ -100,7 +115,9 @@ export const createPost = (payload) => async (dispatch) => {
 export const getAllPost = () => async (dispatch) => {
   await dispatch({ type: types.GET_ALL_POST_REQUEST });
   try {
-    let res = await axios.get("http://localhost:7000/posts/all/getall");
+    let res = await axios.get(
+      "https://backendforadobeassignment-production.up.railway.app/posts/all/getall"
+    );
     await dispatch({ type: types.GET_ALL_POST_SUCCESS, payload: res.data });
     return "SUCCESS";
   } catch (err) {
@@ -115,7 +132,9 @@ export const deletePostRequest = (id) => async (dispatch) => {
   await dispatch({ type: types.DELETE_POST_REQUEST });
 
   try {
-    let res = await axios.delete(`http://localhost:7000/posts/${id}`);
+    let res = await axios.delete(
+      `https://backendforadobeassignment-production.up.railway.app/posts/${id}`
+    );
     await dispatch({ type: types.DELETE_POST_SUCCESS });
     return "SUCCESS";
   } catch (err) {
@@ -131,7 +150,10 @@ export const editPost =
   async (dispatch) => {
     await dispatch({ type: types.EDIT_POST_REQUEST });
     try {
-      let res = await axios.put(`http://localhost:7000/posts/${id}`, payload);
+      let res = await axios.put(
+        `https://backendforadobeassignment-production.up.railway.app/posts/${id}`,
+        payload
+      );
       await dispatch({ type: types.EDIT_POST_SUCCESS });
       return "SUCCESS";
     } catch (err) {
@@ -145,7 +167,9 @@ export const editPost =
 
 export const likePost = (id) => async (dispatch) => {
   try {
-    let res = await axios.put(`http://localhost:7000/posts/${id}/like`);
+    let res = await axios.put(
+      `https://backendforadobeassignment-production.up.railway.app/posts/${id}/like`
+    );
     await dispatch({ type: types.LIKE_POST_SUCCESS, payload: res.data });
     return "SUCCESS";
   } catch (err) {
@@ -159,7 +183,9 @@ export const likePost = (id) => async (dispatch) => {
 
 export const dislikePost = (id) => async (dispatch) => {
   try {
-    let res = await axios.put(`http://localhost:7000/posts/${id}/unlike`);
+    let res = await axios.put(
+      `https://backendforadobeassignment-production.up.railway.app/posts/${id}/unlike`
+    );
     await dispatch({ type: types.DISLIKE_POST_SUCCESS, payload: res.data });
     return "SUCCESS";
   } catch (err) {

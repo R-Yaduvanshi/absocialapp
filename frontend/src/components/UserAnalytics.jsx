@@ -19,12 +19,16 @@ import {
   AiFillFacebook,
 } from "react-icons/ai";
 const getTotalUserNumber = async () => {
-  const res = await axios.get("http://localhost:7000/analytics/users");
+  const res = await axios.get(
+    "https://backendforadobeassignment-production.up.railway.app/analytics/users"
+  );
   return res;
 };
 
 const getActiveUser = () => {
-  const res = axios.get("http://localhost:7000/analytics/users/top-active");
+  const res = axios.get(
+    "https://backendforadobeassignment-production.up.railway.app/analytics/users/top-active"
+  );
   return res;
 };
 const UserAnalytics = () => {
