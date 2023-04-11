@@ -69,7 +69,7 @@ const UserAnalytics = () => {
         >
           Top 5 Users
         </Text>
-        <SimpleGrid columns={3} spacing={5} mt="10px">
+        <SimpleGrid columns={["1", "1", "2", "3", "3"]} spacing={5} mt="10px">
           {activeUser?.map((el) => {
             return (
               <Box
@@ -82,6 +82,7 @@ const UserAnalytics = () => {
                 display={"flex"}
                 justifyContent={"center"}
                 alignItems={"center"}
+                key={el._id}
               >
                 <Box w="80%" h="310px">
                   <Flex display={"flex"} justifyContent={"center"}>

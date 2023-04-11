@@ -6,8 +6,9 @@ const initialState = {
   currentUser: {},
   allUsers: [],
   allPosts: [],
-  currentLikePost: {},
-  currentDisLikePost: {},
+  currentLikePost: [],
+  currentDisLikePost: [],
+  isAuthorized: false,
 };
 
 export const reducer = (oldState = initialState, { type, payload }) => {
@@ -98,6 +99,7 @@ export const reducer = (oldState = initialState, { type, payload }) => {
         ...oldState,
         isLoading: false,
         currentUser: payload,
+        isAuthorized: true,
       };
 
     // <============================ Create Post Reducer <==========================================>
@@ -166,7 +168,7 @@ export const reducer = (oldState = initialState, { type, payload }) => {
     case types.LIKE_POST_SUCCESS:
       return {
         ...oldState,
-        currentLikePost: payload,
+        currentLikePost: [...oldState.currentLikePost, payload],
       };
     case types.LIKE_POST_FAILURE:
       return {
@@ -174,11 +176,11 @@ export const reducer = (oldState = initialState, { type, payload }) => {
         isError: true,
       };
 
-    // <============================ Like Post Reducer <==========================================>
+    // <============================ DisLike Post Reducer <==========================================>
     case types.DISLIKE_POST_SUCCESS:
       return {
         ...oldState,
-        currentDisLikePost: payload,
+        currentDisLikePost: [...oldState.currentDisLikePost, payload],
       };
     case types.DISLIKE_POST_FAILURE:
       return {

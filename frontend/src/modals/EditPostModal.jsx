@@ -14,16 +14,26 @@ import {
   Input,
   useToast,
 } from "@chakra-ui/react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { BiLike, BiEdit } from "react-icons/bi";
 import { editPost, getAllPost } from "../redux/action";
-const EditPostModal = ({ content, id }) => {
+const EditPostModal = ({ content, id, user_id }) => {
   const [newContent, setNewContent] = useState("");
   const { isOpen, onClose, onOpen } = useDisclosure();
   const toast = useToast();
   const dispatch = useDispatch();
+  const { currentUser } = useSelector((store) => store);
 
   const handleEdit = async () => {
+    if (currentUser._id !== user_id) {
+      return toast({
+        description: "You are not authorized to delete this post .",
+        status: "error",
+        duration: 2500,
+        isClosable: true,
+        position: "top",
+      });
+    }
     const payload = {
       content: newContent || content,
     };

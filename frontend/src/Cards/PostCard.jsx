@@ -29,12 +29,22 @@ import "aos/dist/aos.css";
 
 const PostCard = ({ user_id, content, likes, id, name, zoom, width }) => {
   const dispatch = useDispatch();
-  const { currentLikePost, currentDisLikePost } = useSelector((store) => store);
+  const { currentLikePost, currentDisLikePost, isAuthorized, currentUser } =
+    useSelector((store) => store);
   const toast = useToast();
 
   // <==============================> Delete Post <======================================>
 
-  const handleDeletePost = async (id) => {
+  const handleDeletePost = async (id, user_id) => {
+    if (currentUser._id !== user_id) {
+      return toast({
+        description: "You are not authorized to delete this post .",
+        status: "error",
+        duration: 2500,
+        isClosable: true,
+        position: "top",
+      });
+    }
     let res = await dispatch(deletePostRequest(id));
 
     if (res == "SUCCESS") {
@@ -61,7 +71,18 @@ const PostCard = ({ user_id, content, likes, id, name, zoom, width }) => {
   // <==============================> Like Post <======================================>
 
   const handleLike = async (id) => {
-    if (currentLikePost._id == id) {
+    if (!isAuthorized) {
+      return toast({
+        description:
+          "You have not Logged in, please generate random user from above",
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+        position: "top",
+      });
+    }
+    const flagCheck = currentLikePost.some((elem) => elem._id == id);
+    if (flagCheck) {
       return toast({
         description: "You have already Like this post",
         status: "error",
@@ -84,8 +105,19 @@ const PostCard = ({ user_id, content, likes, id, name, zoom, width }) => {
   // <==============================> DisLike Post <======================================>
 
   const handleUnlike = async (id, likes) => {
+    if (!isAuthorized) {
+      return toast({
+        description:
+          "You have not loggedin, please generate random user from above",
+        status: "error",
+        duration: 1000,
+        isClosable: true,
+        position: "top",
+      });
+    }
+    const flagCheck = currentDisLikePost.some((elem) => elem._id == id);
     if (likes !== 0) {
-      if (currentDisLikePost._id == id) {
+      if (flagCheck) {
         return toast({
           description: "You have already Dislike this post",
           status: "error",
@@ -167,12 +199,12 @@ const PostCard = ({ user_id, content, likes, id, name, zoom, width }) => {
         >
           Unlike
         </Button>
-        <EditPostModal content={content} id={id} />
+        <EditPostModal content={content} id={id} user_id={user_id} />
         <Button
           flex="1"
           variant="ghost"
           leftIcon={<MdDeleteOutline />}
-          onClick={() => handleDeletePost(id)}
+          onClick={() => handleDeletePost(id, user_id)}
         >
           Delete
         </Button>

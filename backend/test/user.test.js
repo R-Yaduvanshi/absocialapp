@@ -17,15 +17,15 @@ describe("users API", () => {
         .request(baseURL)
         .post("/users")
         .send({
-          name: "Sonu Sharma",
-          email: "sonu@gmail.com",
+          name: "King kong 420",
+          email: "kingkong@gmail.com",
           bio: "Big Bull",
         })
         .end((err, response) => {
           expect(response).to.have.status(201);
           expect(response.body).to.be.an("object");
-          expect(response.body).to.have.property("name", "Sonu Sharma");
-          expect(response.body).to.have.property("email", "sonu@gmail.com");
+          expect(response.body).to.have.property("name", "King kong 420");
+          expect(response.body).to.have.property("email", "kingkong@gmail.com");
           expect(response.body).to.have.property("bio", "Big Bull");
           done();
         });
