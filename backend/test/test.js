@@ -145,4 +145,87 @@ describe("users API", () => {
         });
     });
   });
+
+  // <======================= post api check <============================================>
+
+  describe("POST /posts", () => {
+    it("It Should create a new post", (done) => {
+      chai
+        .request(baseURL)
+        .post("/posts")
+        .send({
+          name: "Albert",
+          user_id: "6431af834375b95faf463d4b",
+          content:
+            "I scorched the earth with my talent and I let my light shine.",
+          likes: 0,
+        })
+        .end((err, response) => {
+          expect(response).to.have.status(201);
+          expect(response.body).to.be.an("object");
+          expect(response.body).to.have.property("name", "Albert");
+          expect(response.body).to.have.property(
+            "user_id",
+            "6431af834375b95faf463d4b"
+          );
+          expect(response.body).to.have.property(
+            "content",
+            "I scorched the earth with my talent and I let my light shine."
+          );
+          expect(response.body).to.have.property("likes", 0);
+          expect(response.body).to.have.property("createdAt");
+          expect(response.body).to.have.property("updatedAt");
+          done();
+        });
+    });
+  });
+
+  // <========================== Test Retrieve a post by id <==================================>
+
+  describe("GET /post/:id", () => {
+    it("It should return a post", (done) => {
+      chai
+        .request(baseURL)
+        .get("/posts/6433e878c33057f4a0925a58")
+        .end((err, response) => {
+          expect(response).to.have.status(200);
+          expect(response.body).to.be.an("object");
+          done();
+        });
+    });
+  });
+
+  // <========================== Test Delete a post by id <==================================>
+
+  describe("DELETE /posts/:id", () => {
+    it("it should delete a post", (done) => {
+      chai
+        .request(baseURL)
+        .delete("/users/6433e878c33057f4a0925a58")
+        .end((err, response) => {
+          expect(response).to.have.status(200);
+          expect(response.body).to.be.an("object");
+          done();
+        });
+    });
+  });
+
+  // <========================== Test Update a post by id <==================================>
+
+  describe("PUT /posts/:id", () => {
+    it("it should update a post", (done) => {
+      chai
+        .request(baseURL)
+        .put("/posts/6433e878c33057f4a0925a58")
+        .send({
+          content:
+            "You’re braver than you believe, stronger than you seem, and smarter than you think.",
+        })
+        .end((err, response) => {
+          expect(response).to.have.status(200);
+          expect(response.body).to.be.an("object");
+          done();
+        });
+    });
+  });
 });
