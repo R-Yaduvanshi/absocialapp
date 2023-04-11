@@ -66,13 +66,78 @@ describe("users API", () => {
     });
   });
 
-  describe("GET /users/:id", () => {
-    // <============================> Test Retrieve a user by id. <================================>
+  // <============================> Test Retrieve a user by id. <================================>
 
+  describe("GET /users/:id", () => {
     it("It should return an user", (done) => {
       chai
         .request(baseURL)
         .get("/users/6432816b13e4f6250cf64172")
+        .end((err, response) => {
+          expect(response).to.have.status(200);
+          expect(response.body).to.be.an("object");
+          done();
+        });
+    });
+  });
+
+  // <======================> Test Retrieve a total count of users in DB. <==========================>
+
+  describe("GET /analytics/users", () => {
+    it("It should return Total Number of users available in DB", (done) => {
+      chai
+        .request(baseURL)
+        .get("/analytics/users")
+        .end((err, response) => {
+          expect(response).to.have.status(200);
+          expect(response.body).to.be.an("object");
+          expect(response.body).to.have.property("total");
+          done();
+        });
+    });
+  });
+
+  // <============================> Test Retrieve a top 5 Users. <==================================>
+
+  describe("GET /analytics/users/top-active", () => {
+    it("It should return top 5 active user", (done) => {
+      chai
+        .request(baseURL)
+        .get("/analytics/users/top-active")
+        .end((err, response) => {
+          expect(response).to.have.status(200);
+          expect(response.body).to.be.an("array");
+          expect(response.body).to.have.lengthOf(5);
+          done();
+        });
+    });
+  });
+
+  // <============================> Test Delete a user by ID. <==================================>
+  describe("DELETE /users/:id", () => {
+    it("it should delete user", (done) => {
+      chai
+        .request(baseURL)
+        .delete("/users/64316373ea26973dc9264cda")
+        .end((err, response) => {
+          expect(response).to.have.status(200);
+          expect(response.body).to.be.an("object");
+          done();
+        });
+    });
+  });
+
+  // <============================> Test Edit a user by ID. <==================================>
+
+  describe("PUT /users/:id", () => {
+    it("it should update user", (done) => {
+      chai
+        .request(baseURL)
+        .put("/users/6431aefd4375b95faf463d3d")
+        .send({
+          name: "Amar Singh",
+          bio: "I am  amar",
+        })
         .end((err, response) => {
           expect(response).to.have.status(200);
           expect(response.body).to.be.an("object");

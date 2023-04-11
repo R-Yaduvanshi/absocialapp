@@ -18,7 +18,7 @@ const PostList = () => {
   const [flag, setFlag] = useState(false);
   const toast = useToast();
   const dispatch = useDispatch();
-  const { allPosts, allUsers, isLoading, isError } = useSelector(
+  const { allPosts, allUsers, currentUser, isError } = useSelector(
     (store) => store
   );
 
@@ -83,7 +83,9 @@ const PostList = () => {
     >
       <Flex justifyContent={"center"}>
         <Button colorScheme={"whatsapp"} onClick={handleRandomLogin}>
-          Please Click To Login a Random User
+          {currentUser.name
+            ? currentUser.name + " CLICK TO CHANGE"
+            : "Please Click To Login a Random User"}
         </Button>
       </Flex>
       {allPosts?.map((el) => {

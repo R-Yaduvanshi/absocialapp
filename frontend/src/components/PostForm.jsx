@@ -20,7 +20,7 @@ const PostForm = () => {
   const dispatch = useDispatch();
   const toast = useToast();
 
-  const { currentUser } = useSelector((store) => store);
+  const { currentUser, isAuthorized } = useSelector((store) => store);
   // console.log(!currentUser);
   const handleRandomLogin = () => {
     setFlag(!flag);
@@ -105,7 +105,9 @@ const PostForm = () => {
     <Box p="10px" minHeight={"100vh"} mt="15vh">
       <Flex justifyContent={"center"}>
         <Button colorScheme={"whatsapp"} onClick={handleRandomLogin}>
-          Please Click To Login a Random User
+          {currentUser.name
+            ? currentUser.name + " CLICK TO CHANGE"
+            : "Please Click To Login a Random User"}
         </Button>
       </Flex>
       <Container
@@ -136,7 +138,7 @@ const PostForm = () => {
           <Button
             w="60%"
             colorScheme="orange"
-            isDisabled={buttonFlag ? false : true}
+            isDisabled={isAuthorized ? false : true}
             onClick={handleCreatePost}
           >
             Create

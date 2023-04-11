@@ -14,17 +14,26 @@ import {
   Input,
   useToast,
 } from "@chakra-ui/react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { editUser, getAllUsers } from "../redux/action";
-const EditUserModal = ({ name, email, bio, updatedTime, createdTime, id }) => {
+const EditUserModal = ({ name, email, bio, id }) => {
   const [newName, setNewName] = useState("");
   const [newEmail, setNewEmail] = useState("");
   const [newBio, setNewBio] = useState("");
-
+  const { currentUser } = useSelector((store) => store);
   const { isOpen, onClose, onOpen } = useDisclosure();
   const toast = useToast();
   const dispatch = useDispatch();
   const handleEdit = async () => {
+    if (currentUser._id !== id) {
+      return toast({
+        description: "You are not authorized to update this account",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+      });
+    }
     const payload = {
       name: newName || name,
       email: newEmail || email,

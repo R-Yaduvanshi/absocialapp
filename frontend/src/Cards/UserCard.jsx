@@ -18,14 +18,24 @@ import "aos/dist/aos.css";
 import ViewUserModal from "../modals/ViewUserModal";
 import { timeConverter } from "../utils/convertTime";
 import EditUserModal from "../modals/EditUserModal";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteUser, getAllUsers } from "../redux/action";
 const UserCard = ({ name, email, bio, i, createdAt, updatedAt, id }) => {
   const createdTime = timeConverter(createdAt);
   const updatedTime = timeConverter(updatedAt);
   const dispatch = useDispatch();
+  const { currentUser } = useSelector((store) => store);
   const toast = useToast();
   const handleDelete = async (id) => {
+    if (currentUser._id !== id) {
+      return toast({
+        description: "You are not authorized to delete this accoount",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+      });
+    }
     let res = await dispatch(deleteUser(id));
     await dispatch(getAllUsers());
     toast({
