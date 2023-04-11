@@ -1,8 +1,6 @@
 import {
   Avatar,
   Box,
-  Card,
-  CardBody,
   Container,
   Flex,
   Icon,
@@ -11,33 +9,25 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { FaLongArrowAltRight } from "react-icons/fa";
-import axios from "axios";
-import { useSelector } from "react-redux";
 import {
   AiOutlineInstagram,
   AiOutlineTwitter,
   AiFillFacebook,
 } from "react-icons/ai";
-const getTotalUserNumber = async () => {
-  const res = await axios.get(
-    "https://backendforadobeassignment-production.up.railway.app/analytics/users"
-  );
-  return res;
-};
+import useMyFetchGetRequest from "../hooks/useMyFetch";
 
-const getActiveUser = () => {
-  const res = axios.get(
-    "https://backendforadobeassignment-production.up.railway.app/analytics/users/top-active"
-  );
-  return res;
-};
 const UserAnalytics = () => {
   const [totalUsers, setTotalUsers] = useState("");
   const [activeUser, setActiveUser] = useState([]);
+
+  const getTotalUserNumber = useMyFetchGetRequest("analytics/users");
+  const getActiveUser = useMyFetchGetRequest("analytics/users/top-active");
+
   useEffect(() => {
-    getTotalUserNumber().then((res) => setTotalUsers(res.data.total));
-    getActiveUser().then((res) => setActiveUser(res.data));
+    getTotalUserNumber.then((res) => setTotalUsers(res.data.total));
+    getActiveUser.then((res) => setActiveUser(res.data));
   }, []);
+
   return (
     <Box p="10px" minH={"88vh"} mt="12vh">
       <Container

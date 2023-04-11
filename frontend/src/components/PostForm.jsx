@@ -9,31 +9,18 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getRandomIndex } from "../utils/randomIndex";
-import { createPost, getAllUsers, getRandomUser } from "../redux/action";
+import { createPost, getAllUsers } from "../redux/action";
+import useRandomLogin from "../hooks/useRandomLogin";
 
 const PostForm = () => {
   const { allUsers } = useSelector((store) => store);
-  const [flag, setFlag] = useState(false);
-  const [buttonFlag, setButtonFlag] = useState(false);
   const [content, setContent] = useState("");
   const dispatch = useDispatch();
   const toast = useToast();
 
   const { currentUser, isAuthorized } = useSelector((store) => store);
-  // console.log(!currentUser);
-  const handleRandomLogin = () => {
-    setFlag(!flag);
-    toast({
-      title: "User Fetch",
-      description: "You Logged in Successfully",
-      status: "success",
-      duration: 8000,
-      isClosable: true,
-      position: "top",
-    });
-    setButtonFlag(true);
-  };
+
+  const handleRandomLogin = useRandomLogin();
 
   const handleCreatePost = async () => {
     if (content.length == 0) {
@@ -86,21 +73,6 @@ const PostForm = () => {
       dispatch(getAllUsers());
     }
   }, []);
-
-  useEffect(() => {
-    let index = null;
-    if (allUsers?.length > 0) {
-      const min = 0;
-      const max = allUsers?.length - 1;
-      const ind = getRandomIndex(min, max);
-      index = ind;
-    }
-    if (index !== null) {
-      let payload = allUsers[index];
-      dispatch(getRandomUser(payload));
-    }
-  }, [flag]);
-
   return (
     <Box p="10px" minHeight={"100vh"} mt="15vh">
       <Flex justifyContent={"center"}>

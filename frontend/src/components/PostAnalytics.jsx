@@ -1,32 +1,23 @@
-import { Box, Container, Flex, Icon, SimpleGrid, Text } from "@chakra-ui/react";
+import { Box, Container, Icon, SimpleGrid, Text } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllPost } from "../redux/action";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import PostCard from "../Cards/PostCard";
-import axios from "axios";
+import useMyFetchGetRequest from "../hooks/useMyFetch";
 
-const getTotalPost = async () => {
-  let res = await axios.get(
-    "https://backendforadobeassignment-production.up.railway.app/analytics/posts"
-  );
-  return res;
-};
-
-const getTopPost = async () => {
-  let res = await axios.get(
-    "https://backendforadobeassignment-production.up.railway.app/analytics/posts/top-liked"
-  );
-  return res;
-};
 const PostAnalytics = () => {
   const [totalPost, setTotalPost] = useState("");
+
   const [post, setPost] = useState([]);
 
+  const getTotalPost = useMyFetchGetRequest("analytics/posts");
+
+  const getTopPost = useMyFetchGetRequest("analytics/posts/top-liked");
+
   useEffect(() => {
-    getTotalPost().then((res) => setTotalPost(res.data.total));
-    getTopPost().then((res) => setPost(res.data));
+    getTotalPost.then((res) => setTotalPost(res.data.total));
+    getTopPost.then((res) => setPost(res.data));
   }, []);
+
   return (
     <Box p="10px" minH={"88vh"} mt="12vh">
       {/* All Post Count */}
