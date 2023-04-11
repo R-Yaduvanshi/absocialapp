@@ -31,10 +31,10 @@
 
 <h4 align="center">Frontend Deployed On:</h4>
 <p align="center">
-  <img src="https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white" alt="vercel" />
+  <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" />
 </p>
 
-<h3 align="center"><a href="#"><strong>Want to see live preview »</strong></a></h3>
+<h3 align="center"><a href="https://absocialapp.vercel.app/"><strong>Want to see live preview »</strong></a></h3>
 
 <br />
 
@@ -43,11 +43,11 @@
   <img src="https://img.shields.io/badge/Railway-131415?style=for-the-badge&logo=railway&logoColor=white" />
 </p>
 
-<h3 align="center"><a href="#"><strong>Want to see live preview »</strong></a></h3>
+<h3 align="center"><a href="https://backendforadobeassignment-production.up.railway.app/"><strong>Want to see live preview »</strong></a></h3>
 
 <p align="center">
   <br />&#10023;
-  <a href="#Demo">View Demo</a> &#10023;
+  <a href="https://absocialapp.vercel.app/">View Demo</a> &#10023;
   <a href="#Getting-Started">Getting Started</a> &#10023; 
   <a href="#Install">Installing</a> &#10023;
   <a href="#Contact">Author</a> &#10023;
@@ -55,27 +55,24 @@
 
 <br />
 ## Screens 
-- Homepage / Landing Page
-- Checker Page
 <br />
 
 ## Glimpses of absocialapp 🙈 :
-
 <table>
   <tr>
-    <td><img src="https://i.ibb.co/p1c9Pw9/1.png"  alt="Login" /></td>
-    <td><img  src="https://i.ibb.co/HC2bRKV/3.png"  alt="signup" /></td>
+    <td><img src="https://i.ibb.co/5GYTGy9/Screenshot-2483.png"   alt="home" /></td>
+    <td><img  src="https://i.ibb.co/Qmc2MZM/Screenshot-2482.png" alt="create user" /></td>
   </tr>
   <tr>
-   <td><img src="https://i.ibb.co/KzQf1TM/4.png"  alt="add" /></td>
-    <td><img src="https://i.ibb.co/BTS6H3L/5.png"  alt="report" /></td>
+   <td><img src="https://i.ibb.co/QDLFthR/Screenshot-2484.png  alt="all users" /></td>
+    <td><img src="https://i.ibb.co/T2x1yPz/Screenshot-2485.png"   alt="create post" /></td>
   </tr>
   <tr>
-    <td><img src="https://i.ibb.co/b7RJgcm/6.png" alt="assign" /></td>
-    <td><img src="https://i.ibb.co/F32ZRHg/7.png"  alt="single" /></td>
+    <td><img src="https://i.ibb.co/KKfQjP5/Screenshot-2486.png"  alt="see post" /></td>
+    <td><img src="https://i.ibb.co/Ns84DpM/Screenshot-2487.png"   alt="user anylytics" /></td>
   </tr>
   <tr>
-    <td><img src="https://i.ibb.co/QQg7QgX/8.png"  alt="task" /></td>
+    <td><img src="https://i.ibb.co/rpkVjHM/Screenshot-2488.png"   alt="post anylytics" /></td>
   </tr>
 </table>
 
