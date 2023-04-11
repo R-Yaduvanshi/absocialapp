@@ -34,7 +34,7 @@
   <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" />
 </p>
 
-<h3 align="center"><a href="#"><strong>Want to see live preview »</strong></a></h3>
+<h3 align="center"><a href="https://absocialapp.vercel.app/"><strong>Want to see live preview »</strong></a></h3>
 
 <br />
 
@@ -43,7 +43,7 @@
   <img src="https://img.shields.io/badge/Railway-131415?style=for-the-badge&logo=railway&logoColor=white" />
 </p>
 
-<h3 align="center"><a href="#"><strong>Want to see live preview »</strong></a></h3>
+<h3 align="center"><a href="https://backendforadobeassignment-production.up.railway.app/"><strong>Want to see live preview »</strong></a></h3>
 
 <p align="center">
   <br />&#10023;
