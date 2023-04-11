@@ -6,18 +6,19 @@ import { FaLongArrowAltRight } from "react-icons/fa";
 import PostCard from "../Cards/PostCard";
 import axios from "axios";
 
-let getTotalPost = async () => {
+const getTotalPost = async () => {
   let res = await axios.get("http://localhost:7000/analytics/posts");
   return res;
 };
 
-let getTopPost = async () => {
+const getTopPost = async () => {
   let res = await axios.get("http://localhost:7000/analytics/posts/top-liked");
   return res;
 };
 const PostAnalytics = () => {
   const [totalPost, setTotalPost] = useState("");
   const [post, setPost] = useState([]);
+
   useEffect(() => {
     getTotalPost().then((res) => setTotalPost(res.data.total));
     getTopPost().then((res) => setPost(res.data));

@@ -1,14 +1,17 @@
 import { Box, Container, Icon, Text } from "@chakra-ui/react";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FaLongArrowAltRight } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllUsers } from "../redux/action";
+import axios from "axios";
+import { useSelector } from "react-redux";
+const getTotalUserNumber = async () => {
+  let res = await axios.get("http://localhost:7000/analytics/users");
+  return res;
+};
 const UserAnalytics = () => {
-  const { allUsers } = useSelector((store) => store);
-  const dispatch = useDispatch();
-
+  const [totalUsers, setTotalUsers] = useState("");
+  const { allPosts } = useSelector((store) => store);
   useEffect(() => {
-    dispatch(getAllUsers());
+    getTotalUserNumber().then((res) => setTotalUsers(res.data.total));
   }, []);
   return (
     <Box p="10px" minH={"88vh"} mt="12vh">
@@ -32,9 +35,12 @@ const UserAnalytics = () => {
           fontSize="2xl"
           fontWeight="extrabold"
         >
-          {allUsers.length}
+          {totalUsers}
         </Text>
       </Container>
+      {allPosts?.map((el) => {
+        return <Text key={el._id}>{el.user_id}</Text>;
+      })}
     </Box>
   );
 };
