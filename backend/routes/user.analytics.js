@@ -32,7 +32,7 @@ app.get("/users/top-active", async (req, res) => {
 
     // Getting Top 5 Active users ID Object;
 
-    const top5activeID = await Object.entries(userIdObjects)
+    const top5activeID = Object.entries(userIdObjects)
       .sort((a, b) => b[1] - a[1])
       .slice(0, 5)
       .reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {});
@@ -49,7 +49,10 @@ app.get("/users/top-active", async (req, res) => {
     const TopActiveUsers = [];
     for (let i = 0; i < activeUsers.length; i++) {
       let user = totalUsers.filter((el) => el._id == activeUsers[i]);
-      TopActiveUsers.push(user[0]);
+
+      if (user.length !== 0) {
+        TopActiveUsers.push(user[0]);
+      }
     }
 
     res.status(200).send(TopActiveUsers);
